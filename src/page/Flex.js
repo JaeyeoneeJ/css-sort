@@ -4,6 +4,7 @@ import mockData from "../libs/mockData";
 
 const Wrapper = styled.div`
   width: 100%;
+  min-width: 300px;
 `;
 
 const FlexWrapper = styled.div`
@@ -13,8 +14,10 @@ const FlexWrapper = styled.div`
   justify-content: flex-start;
   align-content: flex-start;
   margin: 0;
+  padding: 20px 0;
 
   border: 3px solid green;
+  box-sizing: border-box;
 `;
 
 const Form = styled.form`
@@ -46,7 +49,6 @@ const Item = styled.div`
   /* border: 1px solid red; */
 
   width: ${({ widthprop }) => widthprop + "%"};
-  /* width: 20%; */
 `;
 const ItemTitle = styled.h3`
   text-align: center;
@@ -86,8 +88,6 @@ const Flex = () => {
       calcItemWidthPer = 100 / itemCount;
     }
 
-    console.log("-----------");
-
     return calcItemWidthPer;
   }, [wrapperWidth, data]);
 
@@ -123,7 +123,7 @@ const Flex = () => {
     window.addEventListener("resize", resizeHandler);
 
     return () => window.removeEventListener("resize", resizeHandler);
-  }, [wrapRef.current]);
+  }, [wrapRef]);
 
   console.log("wrapperWidth", wrapperWidth);
 
@@ -141,7 +141,17 @@ const Flex = () => {
       </Form>
       <ul>
         <li>Flex를 이용하여 컨텐츠 추가에 따른 정렬 로직 조정</li>
+        <li>
+          테스트 방법: input 창에 숫자를 입력하고 버튼을 클릭하여 레이아웃을
+          확인
+        </li>
         <li>width 크기에 따라 보여지는 1줄에 보여지는 컨텐츠의 숫자 조정</li>
+        <li>입력한 숫자가 3 이하일 경우, 컨텐츠의 width가 33.3333%로 조정</li>
+        <li>입력한 숫자가 4 이상일 경우, 컨텐츠의 width를 조정</li>
+        <li>
+          입력한 숫자가 4 이상이고 브라우저 width보다 컨텐츠의 합산 크기가 클
+          경우, 컨텐츠를 아래로 내림
+        </li>
       </ul>
       <FlexWrapper ref={wrapRef}>
         {data.map((item, index) => (
