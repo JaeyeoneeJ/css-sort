@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
 import mockData from "../libs/mockData";
+import ToggleSwipe from "../components/ToggleSwipe";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -23,7 +24,31 @@ const FlexWrapper = styled.div`
 const Form = styled.form`
   width: 100%;
   display: flex;
+  align-items: center;
   gap: 10px;
+`;
+
+const OptionContainer = styled.div`
+  width: 100%;
+  display: flex;
+  gap: 10px;
+`;
+
+const Label = styled.label`
+  min-width: 120px;
+  font-size: 1.1rem;
+  line-height: 1;
+  font-weight: bold;
+  &:before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    margin-right: 8px;
+
+    border-radius: 50%;
+    background-color: gray;
+  }
 `;
 
 const Input = styled.input`
@@ -46,9 +71,8 @@ const Item = styled.div`
   margin-bottom: 10px;
   box-sizing: border-box;
 
-  /* border: 1px solid red; */
-
   width: ${({ widthprop }) => widthprop + "%"};
+  border: ${({ isItemOutline }) => (isItemOutline ? `1px solid red` : "none")};
 `;
 const ItemTitle = styled.h3`
   text-align: center;
@@ -58,6 +82,10 @@ const ItemImg = styled.img`
   display: block;
   width: 68px;
   height: auto;
+`;
+
+const OptionBox = styled.div`
+  padding: 10px 0;
 `;
 
 const Flex = () => {
@@ -127,10 +155,13 @@ const Flex = () => {
 
   console.log("wrapperWidth", wrapperWidth);
 
+  const [isItemOutline, setItemOutline] = useState(false);
+
   return (
     <Wrapper>
       <h1>Flex</h1>
       <Form onSubmit={onSubmitHandler}>
+        <Label>Item Count</Label>
         <Input
           type="number"
           placeholder="보여질 컨텐츠의 숫자를 입력하세요."
@@ -139,6 +170,12 @@ const Flex = () => {
         />
         <Button>Click</Button>
       </Form>
+      <OptionContainer>
+        <OptionBox>
+          <Label>Item Outline</Label>
+          <ToggleSwipe isOn={isItemOutline} setOn={setItemOutline} />
+        </OptionBox>
+      </OptionContainer>
       <ul>
         <li>Flex를 이용하여 컨텐츠 추가에 따른 정렬 로직 조정</li>
         <li>
@@ -155,7 +192,7 @@ const Flex = () => {
       </ul>
       <FlexWrapper ref={wrapRef}>
         {data.map((item, index) => (
-          <Item key={index} widthprop={calcWidth}>
+          <Item key={index} widthprop={calcWidth} isItemOutline={isItemOutline}>
             <ItemImg src={item.img} />
             <ItemTitle>{item.title}</ItemTitle>
           </Item>
