@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
 import mockData from "../libs/mockData";
 import ToggleSwipe from "../components/ToggleSwipe";
+import SizeMeasurement from "../components/SizeMeasurement";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -62,7 +63,7 @@ const Button = styled.button`
   border-radius: 5px;
 `;
 
-const Item = styled.div`
+const Item = styled(SizeMeasurement)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -71,8 +72,9 @@ const Item = styled.div`
   box-sizing: border-box;
 
   width: ${({ widthprop }) => widthprop + "%"};
-  box-shadow: ${({ isItemOutline }) =>
-    isItemOutline ? `0 0 0 2px red inset` : "none"};
+  height: auto;
+  box-shadow: ${({ isItemOutline, outlineColor }) =>
+    isItemOutline ? `0 0 0 2px ${outlineColor} inset` : "none"};
 `;
 
 const ItemTitle = styled.h3`
@@ -95,6 +97,7 @@ const Flex = () => {
   const [inputCount, setInputCount] = useState(1);
 
   const wrapRef = useRef(null);
+  const itemRef = useRef(null);
   const [wrapperWidth, setWrapperWidth] = useState(0);
 
   const calcWidth = useMemo(() => {
@@ -194,12 +197,19 @@ const Flex = () => {
       </ul>
       <FlexWrapper ref={wrapRef}>
         {data.map((item, index) => (
-          <Item key={index} widthprop={calcWidth} isItemOutline={isItemOutline}>
+          <Item
+            key={index}
+            innerRef={itemRef}
+            widthprop={calcWidth}
+            isItemOutline={isItemOutline}
+            outlineColor={"tomato"}
+          >
             <ItemImg src={item.img} />
             <ItemTitle>{item.title}</ItemTitle>
           </Item>
         ))}
       </FlexWrapper>
+      <div style={{ marginTop: "50px" }} />
     </Wrapper>
   );
 };
