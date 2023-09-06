@@ -16,8 +16,7 @@ const FlexWrapper = styled.div`
   align-content: flex-start;
   margin: 0;
   padding: 20px 0;
-
-  border: 3px solid green;
+  box-shadow: 0 0 0 3px green inset;
   box-sizing: border-box;
 `;
 
@@ -72,12 +71,15 @@ const Item = styled.div`
   box-sizing: border-box;
 
   width: ${({ widthprop }) => widthprop + "%"};
-  border: ${({ isItemOutline }) => (isItemOutline ? `1px solid red` : "none")};
+  box-shadow: ${({ isItemOutline }) =>
+    isItemOutline ? `0 0 0 2px red inset` : "none"};
 `;
+
 const ItemTitle = styled.h3`
   text-align: center;
   width: 88px;
 `;
+
 const ItemImg = styled.img`
   display: block;
   width: 68px;
