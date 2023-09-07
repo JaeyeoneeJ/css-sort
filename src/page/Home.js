@@ -20,6 +20,9 @@ const Home = () => {
       <Link to={"/grid"}>
         <Button>Grid</Button>
       </Link>
+      <Link to={"/scroll"}>
+        <Button>Scroll</Button>
+      </Link>
     </div>
   );
 };
