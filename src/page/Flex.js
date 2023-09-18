@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
 import mockData from "../libs/mockData";
 import ToggleSwipe from "../components/ToggleSwipe";
@@ -92,6 +86,7 @@ const ItemImg = styled.img`
   display: block;
   width: 68px;
   height: auto;
+  border: 1px solid ${({ theme }) => theme.colorSet.outline};
 `;
 
 const OptionBox = styled.div`
