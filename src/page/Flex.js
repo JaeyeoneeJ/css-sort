@@ -1,4 +1,10 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import styled from "styled-components";
 import mockData from "../libs/mockData";
 import ToggleSwipe from "../components/ToggleSwipe";
@@ -125,6 +131,7 @@ const Flex = () => {
   }, [wrapperWidth, data]);
 
   console.log("calcWidth", calcWidth);
+  console.log("data", data);
 
   const onChangeHandler = (event) => {
     console.log(event.target.value);
@@ -198,11 +205,12 @@ const Flex = () => {
       <FlexWrapper ref={wrapRef}>
         {data.map((item, index) => (
           <Item
-            key={index}
+            key={`item-${index}`}
             innerRef={itemRef}
             widthprop={calcWidth}
             isItemOutline={isItemOutline}
             outlineColor={"tomato"}
+            dataLength={data.length}
           >
             <ItemImg src={item.img} />
             <ItemTitle>{item.title}</ItemTitle>

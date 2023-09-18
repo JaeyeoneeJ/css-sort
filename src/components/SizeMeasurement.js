@@ -40,6 +40,7 @@ const SizeMeasurement = ({
   isItemOutline = false,
   widthprop = false,
   outlineColor = "black",
+  dataLength = 0,
   ...props
 }) => {
   const boxRef = useRef(null);
@@ -58,7 +59,7 @@ const SizeMeasurement = ({
     resizeHandler();
     window.addEventListener("resize", resizeHandler);
     return () => window.removeEventListener("resize", resizeHandler);
-  }, [contentRef.current, isItemOutline]);
+  }, [contentRef.current, isItemOutline, dataLength]);
 
   return (
     <>
