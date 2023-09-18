@@ -25,3 +25,9 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 - 입력한 숫자가 3 이하일 경우, 컨텐츠의 width가 33.3333%로 조정
 - 입력한 숫자가 4 이상일 경우, 컨텐츠의 width를 조정
 - 입력한 숫자가 4 이상이고 브라우저 width보다 컨텐츠의 합산 크기가 클 경우, 컨텐츠를 아래로 내림
+
+### Theme
+
+- Theme을 통해 LightMode와 DarkMode 구현
+- 모드 변경 시 색상 자동 변환
+- 통일성 및 유지보수 용이성 향상을 위해 Schema 사전 생성
